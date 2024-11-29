@@ -3,25 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Huella de Carbono</title>
+    <title>Cálculo de Huella de Carbono de IAs</title>
+    <link rel="stylesheet" href="{{ asset('css/api.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/calculator.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <h2>Calculadora de Huella de Carbono</h2>
+    <header>
+        <h1>GreenImpact</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ route('home') }}">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
     
-    <form action="{{ route('calculator') }}" method="POST">
-        @csrf
-        <label for="ai_type">Tipo de AI:</label>
-        <input type="text" id="ai_type" name="ai_type" required><br>
+    <h1>Calculadora de Huella de Carbono de IAs</h1>
 
-        <label for="energy_consumed">Energía consumida (kWh):</label>
-        <input type="number" id="energy_consumed" name="energy_consumed" required><br>
+    <div class="container">
+        <!-- Selección de IA -->
+        <label for="ia">Selecciona una IA:</label>
+        <select id="ia">
+            <option value="">Seleccione IA</option>
+            <option value="GPT-3">GPT-3</option>
+            <option value="BERT">BERT</option>
+            <option value="DALL·E">DALL·E</option>
+            <option value="AlphaGo">AlphaGo</option>
+            <option value="DeepMind">DeepMind</option>
+            <option value="T5">T5</option>
+            <option value="ResNet">ResNet</option>
+            <option value="OpenAI Codex">OpenAI Codex</option>
+            <option value="PaLM">PaLM</option>
+            <option value="Gopher">Gopher</option>
+            <option value="CLIP">CLIP</option>
+            <option value="BLOOM">BLOOM</option>
+            <option value="GPT-4">GPT-4</option>
+            <option value="Mistral">Mistral</option>
+            <option value="LLaMA">LLaMA</option>
+        </select>
 
-        <label for="usage_time">Tiempo de uso (horas):</label>
-        <input type="number" id="usage_time" name="usage_time" required><br>
+        <!-- Campo para ingresar horas de uso -->
+        <label for="hours">Horas de uso:</label>
+        <input type="number" id="hours" placeholder="Ingresa las horas de uso">
 
-        <button type="submit">Calcular</button>
-    </form>
+        <!-- Botón para calcular -->
+        <button id="calculate">Calcular Huella de Carbono</button>
 
-    <p><a href="{{ route('home') }}">Volver al inicio</a></p>
+        <!-- Campo de texto para mostrar el resultado -->
+        <textarea id="result" rows="4" cols="50" placeholder="El resultado aparecerá aquí" readonly></textarea>
+    </div>
+
+    <script src="{{ asset('js/api.js') }}"></script>
 </body>
 </html>
